@@ -1,14 +1,14 @@
-# Use a lightweight Debian base
 FROM debian:bookworm-slim
 
-# Install dependencies needed by Hermes
+# Install only the system dependencies required by the existing binary
 RUN apt-get update && apt-get install -y \
-    curl \
-        xz-utils \
-            git \
-                python3
+    python3 \
+        git \
+            && rm -rf /var/lib/apt/lists/*
 
-                    # Expose the gateway command as the entry point
-                    # This ensures it starts automatically on every deployment
-                    CMD ["hermes", "gateway", "start"]
+            # Point to the existing binary in your volume
+            # We use an ENTRYPOINT to ensure the command always runs from the volume
+            ENTRYPOINT ["/opt/data/bin/hermes"]
+            CMD ["gateway", "start"]
+            
                     
