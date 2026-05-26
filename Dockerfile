@@ -10,5 +10,5 @@ RUN apt-get update && apt-get install -y \
 
                     # Expose the gateway command as the entry point
                     # This ensures it starts automatically on every deployment
-                    CMD ["/usr/local/bin/hermes", "gateway", "start"]
+                    CMD ["hermes", "gateway", "start"]
                     
